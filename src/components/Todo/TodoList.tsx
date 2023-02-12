@@ -8,27 +8,70 @@ const TodoList: FunctionComponent<any> = ({moduleName}) => {
 
     useEffect(() => {
         if (localStorage.getItem(moduleName)) {
-            let localStorageValue = localStorage.getItem(moduleName);
-            // @ts-ignore
+            const localStorageValue = localStorage.getItem(moduleName);
+            if (localStorageValue) {
+                localStorageValue.split(',').map((entry, index) => {
+                    if (entry.includes('checked')) {
+                        const newItem = {
+                            text: entry,
+                            checked: true
+                        }
+                        setTodoEntries([...todoEntries, newItem]);
+                    } else {
+                        const newItem = {
+                            text: entry,
+                            checked: false
+                        }
+                        setTodoEntries([...todoEntries, newItem]);
+                    }
+                });
+            }
         }
     }, []);
 
     const handleAdd = () => {
 
         let newAdd = {
-            entry: newEntry,
+            text: newEntry,
             checked: false
         }
 
         setTodoEntries([...todoEntries, newAdd]);
 
+        localStorage.setItem(moduleName, newEntry);
+    }
+
+    const handleChecked = (updatedEntry: object) => {
+
         // @ts-ignore
-        localStorage.setItem(moduleName, [...todoEntries, newAdd]);
+        const modified = {
+            // @ts-ignore
+            text: updatedEntry.text,
+            // @ts-ignore
+            checked: !updatedEntry.checked
+        }
+
+        let entries = todoEntries.slice();
+        // @ts-ignore
+        let filtered = entries.filter((entry: object) => entry.text !== updatedEntry.text);
+        filtered.push(modified);
+        setTodoEntries(filtered);
+
+        const localStorageValue = localStorage.getItem(moduleName);
+        if (localStorageValue) {
+            // @ts-ignore
+            let filteredLs = localStorageValue.split(',').filter(entry => entry.text !== updatedEntry.text);
+            // @ts-ignore
+            filteredLs.push(updatedEntry.text + "-checked");
+
+            localStorage.removeItem(moduleName);
+            filteredLs.forEach(entry => localStorage.setItem(moduleName, entry));
+        }
     }
 
     return (
             <>
-                <TodoListEntry entries={todoEntries} />
+                <TodoListEntry entries={todoEntries} handleChecked={handleChecked} />
                 <TodoListInput entriesCallback={setNewEntry} handleAdd={handleAdd} />
             </>
             );
