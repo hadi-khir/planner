@@ -1,6 +1,7 @@
 import {Button, Stack, TextField} from "@mui/material";
+import React, {forwardRef, FunctionComponent} from "react";
 
-const TodoListInput: React.FunctionComponent<any> = ({entriesCallback, handleAdd}) => {
+const TodoListInput: FunctionComponent<any> = forwardRef(({entriesCallback, handleAdd}, inputRef) => {
 
     return (
             <Stack style={{"paddingTop": "5%"}}
@@ -8,10 +9,10 @@ const TodoListInput: React.FunctionComponent<any> = ({entriesCallback, handleAdd
                 alignItems="center"
                 direction="row"
                 spacing={2}>
-                <TextField multiline fullWidth variant="standard" onChange={(e) => entriesCallback(e.target.value)}/>
+                <TextField inputRef={inputRef} multiline fullWidth variant="standard" onChange={(e) => entriesCallback(e.target.value)}/>
                 <Button variant="outlined" onClick={() => handleAdd()}>+</Button >
             </Stack>
             )
-}
+});
 
 export default TodoListInput;

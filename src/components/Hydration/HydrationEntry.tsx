@@ -1,7 +1,18 @@
 import {Stack} from "@mui/material";
 import LocalDrinkIcon from "@mui/icons-material/LocalDrink";
 
-const HydrationEntry = () => {
+// @ts-ignore
+const HydrationEntry = ({cups}) => {
+
+    const displayCups = () => {
+
+        let icons = [];
+        for (let i = 0; i < cups; i++) {
+            icons.push(<LocalDrinkIcon style={{"fontSize": "xxx-large"}} />);
+        }
+
+        return icons;
+    }
 
     return (
             <Stack
@@ -9,8 +20,7 @@ const HydrationEntry = () => {
                 alignItems="center"
                 direction="row"
                 spacing={2}>
-                <LocalDrinkIcon style={{"fontSize": "xxx-large"}} />
-                <LocalDrinkIcon style={{"fontSize": "xxx-large"}} />
+                {displayCups()}
             </Stack>
             )
 }

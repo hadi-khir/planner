@@ -1,6 +1,12 @@
 import {Button, Stack} from "@mui/material";
 
-const HydrationInput = () => {
+// @ts-ignore
+const HydrationInput = ({cups, callback}) => {
+
+    const handleClick = () => {
+        const value = cups + 1;
+        callback(value)
+    }
 
     return (
             <Stack style={{"paddingTop": "5%"}}
@@ -8,7 +14,11 @@ const HydrationInput = () => {
                 alignItems="center"
                 direction="row"
                 spacing={2}>
-                <Button variant="outlined">+</Button >
+                <Button
+                    onClick={() => handleClick()}
+                    variant="outlined">
+                    +
+                </Button >
             </Stack>
             )
 }
