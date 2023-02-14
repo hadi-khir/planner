@@ -5,50 +5,53 @@ import Title from "./components/Title/Title";
 import Menu from "./components/Menu/Menu";
 import Hydration from "./components/Hydration/Hydration";
 import Notes from "./components/Notes/Notes";
+import {Box, Grid} from "@mui/material";
 
 function App() {
 
   return (
     <div className="App">
         <Today />
-        <div className="planner-grid-container">
-            <div className="planner-grid-item tasks-item">
-                <>
-                    <Title title="Tasks" />
-                    <TodoList moduleName={"tasks"} />
-                </>
-            </div>
-            <div className="planner-grid-item goals-item">
-                <>
-                    <Title title="Goals" />
-                    <TodoList moduleName={"goals"} />
-                </>
-            </div>
-            <div className="planner-grid-item food-item">
-                <>
-                    <Title title="Menu" />
-                    <Menu />
-                </>
-            </div>
-            <div className="planner-grid-item notes-item">
-                <>
-                    <Title title="Notes" />
-                    <Notes />
-                </>
-            </div>
-            <div className="planner-grid-item hydration-item">
-                <>
-                    <Title title="Hydration" />
-                    <Hydration />
-                </>
-            </div>
-            <div className="planner-grid-item excercise-item">
-                <>
-                    <Title title="Excercise" />
-                    <TodoList moduleName={"excercise"} />
-                </>
-            </div>
-        </div>
+        <Box sx={{ width: '100%'}}>
+            <Grid container rowSpacing={10} columnSpacing={15}>
+                <Grid item xs={6}>
+                    <>
+                        <Title title="Tasks" />
+                        <TodoList moduleName={"tasks"} />
+                    </>
+                </Grid>
+                <Grid item xs={6}>
+                    <>
+                        <Title title="Goals" />
+                        <TodoList moduleName={"goals"} />
+                    </>
+                </Grid>
+                <Grid item xs={6} className="planner-grid-item food-item">
+                    <>
+                        <Title title="Menu" />
+                        <Menu />
+                    </>
+                </Grid>
+                <Grid item xs={6}>
+                    <>
+                        <Title title="Notes" />
+                        <Notes />
+                    </>
+                </Grid>
+                <Grid item xs={6}>
+                    <>
+                        <Title title="Hydration" />
+                        <Hydration />
+                    </>
+                </Grid>
+                <Grid item xs={6}>
+                    <>
+                        <Title title="Excercise" />
+                        <TodoList moduleName={"excercise"} />
+                    </>
+                </Grid>
+            </Grid>
+        </Box>
     </div>
   )
 }

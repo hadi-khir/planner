@@ -1,11 +1,17 @@
 import HydrationEntry from "./HydrationEntry";
 import HydrationInput from "./HydrationInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Hydration = () => {
     const [cups, setCups] = useState(0)
 
-    console.log(cups);
+    useEffect(() => {
+
+        const lsCups = localStorage.getItem("hydration");
+        // @ts-ignore
+        setCups(lsCups);
+    }, []);
+
     return (
             <>
                 <HydrationEntry cups={cups} />

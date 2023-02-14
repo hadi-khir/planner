@@ -8,21 +8,28 @@ const HydrationEntry = ({cups}) => {
 
         let icons = [];
         for (let i = 0; i < cups; i++) {
-            icons.push(<LocalDrinkIcon style={{"fontSize": "xxx-large"}} />);
+            icons.push(
+                <div key={`hydration-grid-item-${i}`} className={"hydration-grid-item"}>
+                    <LocalDrinkIcon key={`hydration-icon-${i}`} style={{"fontSize": "xxx-large"}}/>
+                </div>
+            );
         }
 
         return icons;
     }
 
+    // @ts-ignore
     return (
-            <Stack
-                justifyContent="center"
-                alignItems="center"
-                direction="row"
-                spacing={2}>
+        <Stack
+            justifyContent="center"
+            alignItems="center"
+            direction="row"
+            spacing={2}>
+            <div className={"hydration-grid-container"}>
                 {displayCups()}
-            </Stack>
-            )
+            </div>
+        </Stack>
+    )
 }
 
 export default HydrationEntry;

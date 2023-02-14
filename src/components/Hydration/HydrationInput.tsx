@@ -6,6 +6,8 @@ const HydrationInput = ({cups, callback}) => {
     const handleClick = () => {
         const value = cups + 1;
         callback(value)
+
+        localStorage.setItem("hydration", value);
     }
 
     return (

@@ -5,7 +5,7 @@ import {FunctionComponent, useEffect, useRef, useState} from "react";
 const TodoList: FunctionComponent<any> = ({moduleName}) => {
     const [todoEntries, setTodoEntries] : any = useState([]);
     const [newEntry, setNewEntry] = useState("");
-    const inputRef = useRef(null);
+    const inputRef = useRef("");
 
     useEffect(() => {
         if (localStorage.getItem(moduleName)) {
